@@ -193,7 +193,7 @@ class _DetailPageState extends State<DetailPage> {
                         ),),
 
                       //Variable
-                      Text("${Global.weight}",
+                      Text("${Global.weight.toInt()}",
                         style: TextStyle(
                             color: MyColors.theme5,
                             fontSize: 56,
@@ -276,9 +276,136 @@ class _DetailPageState extends State<DetailPage> {
                   ),
                 ),
               ],
-            )
+            ),
+            const SizedBox(
+              height: 18,
+            ),
+            Container(
+              height: 360,
+              width: double.infinity,
+              padding: const EdgeInsets.all(12),
+
+              decoration: BoxDecoration(
+                  color: MyColors.theme1,
+                  borderRadius: BorderRadius.circular(20),
+                  boxShadow: [
+                    BoxShadow(
+                      color: MyColors.theme4,
+                      blurRadius: 10,
+                      offset: Offset(5, 5),
+                    ),
+                    const BoxShadow(
+                      color: Colors.white60,
+                      blurRadius: 10,
+                      offset: Offset(-3, -3),
+                    )
+                  ]
+              ),
+
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  //Age
+                  Text("Height",
+                    style: TextStyle(
+                        color: MyColors.theme4,
+                        fontSize: 20
+                    ),),
+
+                  //Variable
+                  Text("${Global.heightFeet.toInt()}' ${Global.heightInch.toInt()}\"",
+                    style: TextStyle(
+                        color: MyColors.theme5,
+                        fontSize: 56,
+                        fontWeight: FontWeight.w300
+                    ),),
+
+                  //Feet
+                  Stack(
+                    alignment: Alignment.bottomCenter,
+                    children: [
+                      Slider(
+                          value: Global.heightFeet.toDouble(),
+                          min: 0,
+                          max: 12,
+                          
+                          divisions: 12,
+                          label: Global.heightFeet.toString(),
+                          activeColor: MyColors.theme3,
+                          thumbColor: MyColors.theme3,
+                          inactiveColor: MyColors.theme2,
+                          onChanged: (value) {
+                            setState(() {
+                              Global.heightFeet = value;
+                            });
+                          },
+                      ),
+                      Positioned(
+                        height: 20,
+                          child: Text("(Feet)",
+                          style: TextStyle(
+                            color: MyColors.theme4
+                          ),),
+                      )
+                    ],
+                  ),
+
+                  //Inch
+                  Stack(
+                    alignment: Alignment.bottomCenter,
+                    children: [
+                      Slider(
+                        value: Global.heightInch.toDouble(),
+                        min: 0,
+                        max: 12,
+                        divisions: 12,
+                        label: Global.heightInch.toString(),
+                        activeColor: MyColors.theme3,
+                        thumbColor: MyColors.theme3,
+                        inactiveColor: MyColors.theme2,
+                        onChanged: (value) {
+                          setState(() {
+                            Global.heightInch = value;
+                          });
+                        },
+                      ),
+                      Positioned(
+                        height: 20,
+                          child: Text("(Inch)",
+                          style: TextStyle(
+                            color: MyColors.theme4
+                          ),),
+                      )
+                    ],
+                  ),
+
+                ],
+              ),
+            ),
           ],
         ),
+      ),
+      floatingActionButton: ElevatedButton.icon(
+          onPressed: () {
+            Global.convertMeter = (Global.heightFeet * 0.3048) + (Global.heightInch * 0.0254);
+            Global.BMI = Global.weight / (Global.convertMeter * Global.convertMeter);
+            print("-----------------------------------------");
+            print("BMI = ${Global.BMI}");
+            print("-----------------------------------------");
+          },
+          style: ElevatedButton.styleFrom(
+            elevation: 5,
+            minimumSize: const Size(392, 50),
+            backgroundColor: MyColors.theme3,
+            foregroundColor: MyColors.theme1,
+            shadowColor: MyColors.theme4
+          ),
+          icon: const Icon(Icons.calculate_outlined),
+          label: const Text("Calculate BMI",
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold
+          ),)
       ),
       backgroundColor: MyColors.theme1,
     );
