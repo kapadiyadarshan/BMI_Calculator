@@ -1,3 +1,4 @@
+import 'package:bmi_calculator/utils/route_utils.dart';
 import 'package:flutter/material.dart';
 
 import '../../Global/global_class.dart';
@@ -389,9 +390,8 @@ class _DetailPageState extends State<DetailPage> {
           onPressed: () {
             Global.convertMeter = (Global.heightFeet * 0.3048) + (Global.heightInch * 0.0254);
             Global.BMI = Global.weight / (Global.convertMeter * Global.convertMeter);
-            print("-----------------------------------------");
-            print("BMI = ${Global.BMI}");
-            print("-----------------------------------------");
+            
+            Navigator.of(context).pushNamed(MyRoute.BMIPage);
           },
           style: ElevatedButton.styleFrom(
             elevation: 5,

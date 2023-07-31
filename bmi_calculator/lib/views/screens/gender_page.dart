@@ -11,7 +11,7 @@ class GenderPage extends StatefulWidget {
 
 class _GenderPageState extends State<GenderPage> {
 
-  String Selected = "";
+  String? Selected;
 
   @override
   Widget build(BuildContext context) {
@@ -179,7 +179,49 @@ class _GenderPageState extends State<GenderPage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.of(context).pushNamed(MyRoute.DetailPage);
+          if(Selected!=null)
+            {
+              Navigator.of(context).pushNamed(MyRoute.DetailPage);
+            }
+          else
+            {
+              showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
+                  icon: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.man_4,
+                      size: 64,
+                      color: MyColors.theme5,),
+                      Icon(Icons.woman_2,
+                      size: 64,
+                      color: MyColors.theme5,)
+                    ],
+                  ),
+                  title: const Text("Please Select Anyone"),
+                  titleTextStyle: TextStyle(
+                    fontSize: 22,
+                    color: MyColors.theme5
+                  ),
+                  backgroundColor: MyColors.theme1,
+                  actionsAlignment: MainAxisAlignment.center,
+                  actions: [
+                    ElevatedButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: MyColors.theme5
+                        ),
+                        child: Text("Okay",
+                        style: TextStyle(
+                          color: MyColors.theme1
+                        ),),
+                    )
+                  ],
+                ),);
+            }
         },
         shape: const CircleBorder(
           eccentricity: 0.7

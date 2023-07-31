@@ -1,4 +1,5 @@
 import 'package:bmi_calculator/utils/route_utils.dart';
+import 'package:bmi_calculator/views/screens/bmi_page.dart';
 import 'package:bmi_calculator/views/screens/detail_page.dart';
 import 'package:bmi_calculator/views/screens/gender_page.dart';
 import 'package:flutter/material.dart';
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
       routes: {
         MyRoute.GenderPage : (context) => const GenderPage(),
         MyRoute.DetailPage : (context) => const DetailPage(),
+        MyRoute.BMIPage : (context) => const BMIPage(),
       },
     );
   }
